@@ -2,15 +2,15 @@
   import env from "../../../config/env";
 
   export async function preload({ params, query }) {
-    const { entity, id } = params;
+    const { slug, id } = params;
 
-    const url = `${env.api}${entity}/${id}`;
+    const url = `${env.api}${slug}/${id}`;
 
     const res = await this.fetch(url);
 
     if (res.status === 200) {
       const post = await res.json();
-      return { post, entity };
+      return { post, slug };
     }
 
     this.error(res.status, res.statusText);
@@ -19,17 +19,17 @@
 
 <script>
   export let post;
-  export let entity;
+  export let slug;
 </script>
 
 <style>
 </style>
 
 <svelte:head>
-  <title>{entity} - {post._id}</title>
+  <title>{slug} - {post._id}</title>
 </svelte:head>
 
-<h1>{entity} - {post._id}</h1>
+<h1>{slug} - {post._id}</h1>
 
 <div>
   {#if post}
@@ -37,5 +37,5 @@
     <p>{post.body}</p>
     <hr />
   {/if}
-  <a href="/crud/{entity}">Back</a>
+  <a href="/crud/{slug}">Back</a>
 </div>
