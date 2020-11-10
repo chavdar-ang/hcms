@@ -1,10 +1,6 @@
 <script context="module">
-  import env from "../../../config/env";
   import collections from "../../../database/schema";
   import { get } from "../../../lib/api";
-
-  // import env from "../../../config/env";
-  // import collections from "../../../database/schema";
 
   export async function preload({ params }) {
     const { slug } = params;
@@ -50,12 +46,12 @@
 
 <h1>{slug} list</h1>
 
-<ul>
-  {#if posts.length > 0}
+{#if posts.length > 0}
+  <ul>
     {#each posts as post}
       <li><a href="/crud/{slug}/{post._id}">{post.title}</a></li>
     {/each}
-  {:else}
-    <p>Empty</p>
-  {/if}
-</ul>
+  </ul>
+{:else}
+  <p>Empty</p>
+{/if}
